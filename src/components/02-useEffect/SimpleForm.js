@@ -20,7 +20,6 @@ const SimpleForm = () => {
       ...formState,
       [target.name]: target.value,
     });
-    console.log(formState);
   };
 
   return (
