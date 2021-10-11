@@ -58,7 +58,6 @@ const FormWithCustomHook = () => {
           onChange={handleInputChange}
           placeholder="****"
           className="form-control my-2"
-          autoComplete="off"
         />
       </form>
     </>
