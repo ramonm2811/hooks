@@ -1,38 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import useForm from "../../hooks/useForm";
 import "./effect.css";
 
 //Componente funcional para crear un formulario
 const FormWithCustomHook = () => {
-  //State que maneja los cambios del formulario
-  const [formState, setFormState] = useState({
+  //Custom Hook que maneja el state del formulario
+  const [formValues, handleInputChange] = useForm({
     name: "",
     email: "",
     password: "",
   });
 
-  //desestructuracion del formState
-  const { name, email, password } = formState;
+  const { name, email, password } = formValues; //Desestructuración del formValues
 
-  //useEffect para ejecutar un bloque de codigo cuando algo especifico sucede en nuestro componente
-  /*  useEffect(() => console.log("hey"), []);
-
-  useEffect(() => console.log("formState cambió name"), [name]);
-
-  useEffect(() => console.log("formState cambió email"), [email]); */
-
-  //función que maneja el onChange de los input
-  const handleInputChange = ({ target }) => {
-    setFormState({
-      ...formState, //Extraemos todos los valores del state con el spread operator
-      [target.name]: target.value, //Este codigo nos permite utilizar 1 sola función para todos los input
-    });
+  const handleSubmit = (e) => {
+    e.prenventDefault();
+    let keys = Object.keys(formValues);
+    for (let i = 0; i < keys.length; i++) {
+      if (formValues.keys[i] !== "") {
+        console.log(`Input ${keys[i]} verificado`);
+      } else {
+        console.log(`Input ${keys[i]} NO verificado`);
+      }
+    }
   };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <h1>Form With Custom Hook</h1>
       <hr />
-      <form>
+      <div>
         <input
           type="text"
           name="name"
@@ -59,8 +56,11 @@ const FormWithCustomHook = () => {
           placeholder="****"
           className="form-control my-2"
         />
-      </form>
-    </>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </div>
+    </form>
   );
 };
 
