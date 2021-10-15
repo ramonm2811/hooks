@@ -4,8 +4,9 @@ import "../02-useEffect/effect.css";
 
 const MultipleCustomHooks = () => {
   const state = useFetch(`https://www.breakingbadapi.com/api/quotes/1`);
-  const { loading } = state;
-  console.log(state);
+  const { loading, data } = state;
+  // console.log(data[0].quote);
+  console.log();
   return (
     <div>
       <h1>Custom Hooks</h1>
